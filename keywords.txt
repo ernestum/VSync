@@ -1,0 +1,7 @@
+ValueSender	KEYWORD1
+ValueReceiver	KEYWORD1
+addValue	KEYWORD2
+receiveValue	KEYWORD2
+sendAllValues	KEYWORD2
+sendValue	KEYWORD2
+syncValues	KEYWORD2
