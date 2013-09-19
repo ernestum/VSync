@@ -18,9 +18,10 @@ class ValueSender
   int* values[numValues];
   int prevValues[numValues];
   int valuesAdded;
+  unsigned long lastValueSent;
 
   public:	
-  ValueSender() : valuesAdded(0)
+  ValueSender() : valuesAdded(0), lastValueSent(0)
   {
 	
   }
@@ -44,7 +45,7 @@ class ValueSender
     int numValuesChanged = 0;
     for(int i = 0; i < valuesAdded; i++)
     {
-      if(*values[i] != prevValues[i])
+      if(valueChanged(i))
         numValuesChanged++;
     }
     
@@ -65,6 +66,16 @@ class ValueSender
         prevValues[i] = *values[i];
       }
     }
+  }
+  
+  boolean valueChanged(int index)
+  {
+      return *values[index] != prevValues[index];
+  }
+  
+  boolean valueChanged(int* value)
+  {
+    return valueChanged(indexForValue(value));
   }
   
   /**
@@ -97,7 +108,16 @@ class ValueSender
     Serial.print(DELIMITER);
     Serial.print(*values[index]);
     Serial.print(DELIMITER);
+    
+    lastValueSent = millis();
+    
     return true;
+  }
+  
+  void sendKeepalive()
+  {
+    Serial.print(MESSAGE_START);
+    lastValueSent = millis();
   }
   
   /**
@@ -113,6 +133,8 @@ class ValueSender
       Serial.print(*values[i]);
       Serial.print(DELIMITER);
     }
+    
+    lastValueSent = millis();
   }
   
   inline int allValuesMinPackageSize()
@@ -124,6 +146,11 @@ class ValueSender
   {
     return 5;
   }
+  
+  unsigned long timeSinceLastMessage()
+  {
+    return millis() - lastValueSent;
+  }
 };
 
 template<int numValues>
@@ -132,9 +159,10 @@ class ValueReceiver
   private:
   int* values[numValues];
   int valuesAdded;
-
+  unsigned long lastValueReceived;
+  
   public:
-  ValueReceiver() : valuesAdded(0)
+  ValueReceiver() : valuesAdded(0), lastValueReceived(0)
   {
 
   }
@@ -156,6 +184,7 @@ class ValueReceiver
   void receiveValue()
   {
     if(!Serial.find(MESSAGE_START_STR)) return; //Read the header
+    lastValueReceived = millis();
 
     int index = Serial.parseInt(); //Read the type
     
@@ -174,6 +203,11 @@ class ValueReceiver
       int value = Serial.parseInt();
       *values[index] = value;
     }
+  }
+  
+  unsigned long timeSinceLastMessage()
+  {
+    return millis() - lastValueReceived;
   }
 };
 

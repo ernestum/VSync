@@ -5,3 +5,6 @@ receiveValue	KEYWORD2
 sendAllValues	KEYWORD2
 sendValue	KEYWORD2
 syncValues	KEYWORD2
+valueChanged	KEYWORD2
+sendKeepalive	KEYWORD2
+timeSinceLastMessage	KEYWORD2
