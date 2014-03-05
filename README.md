@@ -41,11 +41,6 @@ changed to 4 and 555. If only few (1 or 2) variables changed a Diff-Sync-Package
 if lots of variables changed it is more efficient to send a Full-Sync-Package, because
 the id's of the variables do not need to be sent.
 
-Installation:
--------------
-
-Just clone this repository into you libraries folder and you are done!
-
 
 Tip for debugging:
 ------------------
