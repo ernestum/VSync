@@ -1,98 +1,64 @@
+/*
+    VSync Library
+    
+    This is the VSync library for the arduino platform. It can 'magically' synchronize
+    variables on your Arduino with variables on other Arduinos or in your Processing sketch.
+    
+    
+    Use cases:
+    
+    For example if you read the heading off a digital compass and store it in a variable
+    on your Arduino, you can sync that variable with a Processing sketch. In the Processing
+    sketch you can use it to visualize the digital compass reading.
+    Maybe you have many settings (color of a RGB LED; angle of a servo motor; parameters
+    for a PID algorithm ...), that often need to be changed during the runtime of your Arduino.
+    Simply synchronize the position of a sliders in your Processing sketch
+    with the arduino to transfer transfer a parameter.
+    
+    
+    Technical details:
+    (boring, don't read if you just want to use the library)
+    
+    VSync uses Serial to synchronize int variables, which means that it will work through your
+    USB cable as well as with your XBee. 
+    It also means it can only do integers and will block any other (e.g. debugging) uses of
+    the Serial interface.
+    
+    The library uses a very simple human readable protocol that is optimized for minimal 
+    data traffic (e.g. only when a value changes it is sent over the line).
+    The protocol is package based with two kinds of packages:
+      * Full-Sync-Package: contains the values of all variables
+      * Diff-Sync-Package: contains the values only of variables that changed
+    The Full-Sync-Package looks like this: A<val1>|<val1>|<val3># if you are syncing three
+    variables. E.g if the variables have the values 4, -8, 555 the package looks like:
+      A|4|-8|555#
+    The A at the beginning stands for all values, the # is the end-charakter.
+    The Diff-Sync-Package looks like this: 0|4|2|555# if the first and the last value
+    changed to 4 and 555. If only few (1 or 2) variables changed a Diff-Sync-Package is sent;
+    if lots of variables changed it is more efficient to send a Full-Sync-Package, because
+    the id's of the variables do not need to be sent.
+    
+    Author: Maximilian Ernestus
+*/
+
 #ifndef ValueSync_h
 #define ValueSync_h
 
-#define MESSAGE_START '#'
-#define DELIMITER '|'
-
-#define MESSAGE_START_STR "#"
-#define DELIMITER_STR "|"
-
-#define ALL_VALUES -1
-
 #include "Arduino.h"
 
-template<int numValues>
+#define VSYNC_MESSAGE_END '#'
+#define VSYNC_DELIMITER '|'
+#define VSYNC_ALL 'A'
+
+template<int numVariables>
 class ValueSender
 {
-  private:
-  int* values[numValues];
-  int prevValues[numValues];
-  int valuesAdded;
-  unsigned long lastValueSent;
-
-  public:	
-  ValueSender() : valuesAdded(0), lastValueSent(0)
-  {
-	
-  }
-
-  /**
-   * Adds a new values to be synced between the two arduinos
-   */
-  ValueSender* addValue(int* value)
-  {
-	if(valuesAdded == numValues) return this;
-	values[valuesAdded] = value;
-	valuesAdded++;
-	return this;
-  }
-  
-  /**
-   * Sends all values that have changed since the last call to syncValues
-   */ 
-  void syncValues()
-  {
-    int numValuesChanged = 0;
-    for(int i = 0; i < valuesAdded; i++)
-    {
-      if(valueChanged(i))
-        numValuesChanged++;
-    }
-    
-    if(allValuesMinPackageSize() < numValuesChanged * singleValueMinPackageSize())
-    {
-      //Serial.print("We do one big package because "); Serial.println(numValuesChanged);
-      sendAllValues();
-      for(int i = 0; i < valuesAdded; i++)
-        prevValues[i] = *values[i];
-    }
-    else
-    {
-      //Serial.print("We send single packages because "); Serial.println(numValuesChanged);
-      for(int i = 0; i < valuesAdded; i++)
-      {
-        if(*values[i] != prevValues[i])
-          sendValue(i);
-        prevValues[i] = *values[i];
-      }
-    }
-  }
-  
-  boolean valueChanged(int index)
-  {
-      return *values[index] != prevValues[index];
-  }
-  
-  boolean valueChanged(int* value)
-  {
-    return valueChanged(indexForValue(value));
-  }
-  
-  /**
-   * Sends a value. You need to add it firtst via addValue.
-   */
-  boolean sendValue(int* value)
-  {
-    return sendValue(indexForValue(value));
-  }
-  
-  int indexForValue(int* value)
-  {
-    for(int i = 0; i < valuesAdded; i++)
-      if(values[i] == value)
-        return i;
-    return -1;
-  }
+private:
+  int* variables[numVariables];
+  int prevValues[numVariables];
+  int variablesAdded;
+  Stream* serial;
+//   unsigned long lastValueSent;
   
   /**
    * Sends the x'st value you added to the sender.
@@ -100,115 +66,209 @@ class ValueSender
    */
   boolean sendValue(int index)
   {
-    if(!(index < numValues && index >= 0))
+    if(!(index < numVariables && index >= 0))
       return false;
   
-    Serial.print(MESSAGE_START);
-    Serial.print(index);
-    Serial.print(DELIMITER);
-    Serial.print(*values[index]);
-    Serial.print(DELIMITER);
-    
-    lastValueSent = millis();
+    serial->print(index);
+    serial->print(VSYNC_DELIMITER);
+    serial->print(*variables[index]);
     
     return true;
   }
   
-  void sendKeepalive()
+  boolean sendChangedValues()
   {
-    Serial.print(MESSAGE_START);
-    lastValueSent = millis();
-  }
-  
-  /**
-   * Sends all values that have been added
-   */
-  void sendAllValues()
-  {
-    Serial.print(MESSAGE_START);
-    Serial.print(ALL_VALUES);
-    Serial.print(DELIMITER);
-    for(int i = 0; i < valuesAdded; i++)
-    {
-      Serial.print(*values[i]);
-      Serial.print(DELIMITER);
-    }
-    
-    lastValueSent = millis();
+    boolean firstValueSent = false;
+      for(int i = 0; i < variablesAdded; i++)
+      {
+        if(variableChanged(i))
+	{
+	  if(firstValueSent) 
+	    serial->write(VSYNC_DELIMITER);
+          sendValue(i);
+	  firstValueSent = true;
+	  
+	}
+      }
+      serial->print(VSYNC_MESSAGE_END);
   }
   
   inline int allValuesMinPackageSize()
   {
-    return 2 + 2*valuesAdded;
+    return 2 + 2*variablesAdded;
   }
   
   inline int singleValueMinPackageSize()
   {
-    return 5;
+    return 4;
   }
   
-  unsigned long timeSinceLastMessage()
+//   void sendKeepalive()
+//   {
+//     serial->print(VSYNC_MESSAGE_END);
+//     lastValueSent = millis();
+//   }
+
+public:	
+  ValueSender(Stream &serial = Serial) : variablesAdded(0), serial(&serial) //, lastValueSent(0)
   {
-    return millis() - lastValueSent;
+	
   }
+
+  /**
+   * Adds a new variables to be synced between the two arduinos
+   */
+  ValueSender* observe(int &variable)
+  {
+	if(variablesAdded == numVariables) return this;
+	variables[variablesAdded] = &variable;
+	variablesAdded++;
+	return this;
+  }
+  
+  /**
+   * Sends all variables that have changed since the last call to syncValues
+   */ 
+  void sync()
+  {
+    int numVariablesChanged = 0;
+    for(int i = 0; i < variablesAdded; i++)
+      if(variableChanged(i))
+        numVariablesChanged++;
+    
+    if(numVariablesChanged == 0)
+      return; //TODO: maybe check for keepalives that need to be sent?
+    
+    if(allValuesMinPackageSize() < numVariablesChanged * singleValueMinPackageSize())
+      sendAllVariables();
+    else
+      sendChangedValues();
+    
+    for(int i = 0; i < variablesAdded; i++)
+      prevValues[i] = *variables[i];
+      
+//     lastValueSent = millis();
+  }
+  
+  /**
+   * Check if a variable has been changed since the last sync.
+   */
+  boolean variableChanged(int index)
+  {
+      return *variables[index] != prevValues[index];
+  }
+    
+  /**
+   * Sends all values that have been added
+   */
+  void sendAllVariables()
+  {
+    serial->print(VSYNC_ALL);
+    for(int i = 0; i < variablesAdded; i++)
+    {
+      serial->print(VSYNC_DELIMITER);
+      serial->print(*variables[i]);
+    }
+    serial->print(VSYNC_MESSAGE_END);
+  }
+  
+//   unsigned long timeSinceLastMessage()
+//   {
+//     return millis() - lastValueSent;
+//   }
 };
 
-template<int numValues>
+template<int numVariables>
 class ValueReceiver
 {
-  private:
-  int* values[numValues];
-  int valuesAdded;
-  unsigned long lastValueReceived;
+private:
+  int* variables[numVariables];
+  int variablesAdded;
+//   unsigned long lastValueReceived;
+  String readbuffer;
+  Stream* serial;
   
-  public:
-  ValueReceiver() : valuesAdded(0), lastValueReceived(0)
+  void advanceCursor(int &cstart, int &cend, String &message)
+  {
+    cstart = cend+1;
+    cend = message.indexOf(VSYNC_DELIMITER, cstart+1);   
+  }
+  
+  void analyzeMessage(String message)
+  {
+    if(message[0] == VSYNC_ALL) //It is a Full-Sync-Package
+    {
+      message += VSYNC_DELIMITER;
+      for(int cstart = 2, cend = message.indexOf(VSYNC_DELIMITER, 2), i = 0; cend > 0 && i < variablesAdded; advanceCursor(cstart, cend, message), i++)
+      {
+	*variables[i] = message.substring(cstart, cend).toInt();
+      }
+    }
+    else //It is a Diff-Sync-Package
+    {
+      for(int cstart = 0, cend = message.indexOf(VSYNC_DELIMITER), i = 0; cend > 0 && i < variablesAdded; i++)
+      {
+	//Read the index
+	int vIndex = message.substring(cstart, cend).toInt();
+	advanceCursor(cstart, cend, message);
+	
+	//Read the value
+	int value = message.substring(cstart, cend).toInt();
+	advanceCursor(cstart, cend, message);
+	
+	//Update the variable with the index to the new value
+	*variables[vIndex] = value;
+      }
+    }
+  }
+  
+public:
+  
+  /**
+   * Creates a new value receiver.
+   */
+  ValueReceiver(Stream &serial = Serial) : variablesAdded(0), readbuffer(""), serial(&serial) //, lastValueReceived(0)
   {
 
   }
   
    /**
-   * Adds a new values to be synced between the two arduinos
+   * Adds a new variables to be synced.
    */
-  ValueReceiver* addValue(int* value)
+  ValueReceiver* observe(int &variable)
   {
-	if(valuesAdded == numValues) return this;
-	values[valuesAdded] = value;
-	valuesAdded++;
+	if(variablesAdded == numVariables) return this; //check if we still can observe more variables
+	variables[variablesAdded] = &variable; //store the pointer to the variable in an array
+	variablesAdded++;
 	return this;
   }
 
    /**
-   * Blocks until a new value can be read from the stream and sets the according variable.
+   * Synchronizes the observed variables.
    */
-  void receiveValue()
+  void sync()
   {
-    if(!Serial.find(MESSAGE_START_STR)) return; //Read the header
-    lastValueReceived = millis();
-
-    int index = Serial.parseInt(); //Read the type
-    
-    if(index == ALL_VALUES)
+    while(serial->available() > 0)
     {
-      if(Serial.read() != DELIMITER) return;
-      for(int i = 0; i < valuesAdded; i++) 
+      char in = serial->read();
+//       serial->print(in);
+      if(in == VSYNC_MESSAGE_END) //if the end of the message is reached
       {
-        *values[i] = Serial.parseInt();
-        if(Serial.read() != DELIMITER) return;
+	analyzeMessage(readbuffer); //analyze and update variables
+	readbuffer = ""; //clear the reading buffer
+      }
+      else
+      {
+	readbuffer += in; //Fill the reading buffer
       }
     }
-    else
-    {
-      if(Serial.read() != DELIMITER) return;
-      int value = Serial.parseInt();
-      *values[index] = value;
-    }
   }
+
   
-  unsigned long timeSinceLastMessage()
-  {
-    return millis() - lastValueReceived;
-  }
+//   unsigned long timeSinceLastMessage()
+//   {
+//     return millis() - lastValueReceived;
+//   }
 };
 
 #endif

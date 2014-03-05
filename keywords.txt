@@ -1,10 +1,6 @@
 ValueSender	KEYWORD1
 ValueReceiver	KEYWORD1
-addValue	KEYWORD2
-receiveValue	KEYWORD2
-sendAllValues	KEYWORD2
-sendValue	KEYWORD2
-syncValues	KEYWORD2
-valueChanged	KEYWORD2
-sendKeepalive	KEYWORD2
-timeSinceLastMessage	KEYWORD2
+observe	KEYWORD2
+sync	KEYWORD2
+sendAllVariables	KEYWORD2
+variableChanged	KEYWORD2
