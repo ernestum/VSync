@@ -33,7 +33,7 @@ The protocol is package based with two kinds of packages:
 The Full-Sync-Package looks like this: A<val1>|<val1>|<val3># if you are syncing three
 variables. E.g if the variables have the values 4, -8, 555 the package looks like:
 
-A|4|-8|555#
+`A|4|-8|555#`
 
 The A at the beginning stands for all values, the # is the end-charakter.
 The Diff-Sync-Package looks like this: 0|4|2|555# if the first and the last value
