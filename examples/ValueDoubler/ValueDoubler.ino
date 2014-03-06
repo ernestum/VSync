@@ -34,7 +34,6 @@ void setup()
 
   //  Tell the sender what variables to observe and keep in sync.
   //  Be sure to keep the order of variables the same on the receiving and the sending end!
-  //  Do not forget the mysterious &-sign in front of the variable names!
   sender.observe(doubleA);
   sender.observe(doubleB);
 
@@ -46,7 +45,7 @@ void setup()
 
 void loop()
 {
-  //  for the receiver and for the sender you must call syncValues() onc in every loop.
+  //  for the receiver and for the sender you must call sync() once in every loop.
   //  It does not matter where in the loop you call it, 
   //  but receiving at the start and sending at the end makes most sense.
   receiver.sync();
@@ -54,6 +53,5 @@ void loop()
   doubleB = valueB * 2;
   sender.sync();
 }
-
 
 
