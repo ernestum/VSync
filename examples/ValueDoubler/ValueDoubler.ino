@@ -10,7 +10,7 @@
    
 */
 
-#include <ValueSync.h>
+#include <VSync.h>
 
 //  Create a new sender here
 //  Put the number of variables you want to sync in the pointy brackets

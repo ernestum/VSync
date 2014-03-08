@@ -1,5 +1,3 @@
-#include <ValueSync.h>
-
 /*
     SimpleSender
 
@@ -12,6 +10,8 @@
     Author: Maximilian Ernestus
     
 */
+
+#include <VSync.h>
 
 //  Create a new sender here
 //  Put the number of variables you want to sync in the pointy brackets

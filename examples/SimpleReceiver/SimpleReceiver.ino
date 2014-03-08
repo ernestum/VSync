@@ -16,7 +16,7 @@
    
 */
 
-#include <ValueSync.h>
+#include <VSync.h>
 
 //  Create a new receiver that can receive up to two values.
 //  Always put the number of values to sync in the pointy brackets.
