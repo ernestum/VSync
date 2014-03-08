@@ -135,24 +135,15 @@ Technical details:
 
 (boring, don't read if you just want to use the library)
     
-VSync uses Serial to synchronize int variables, which means that it will work through your
-USB cable as well as with your XBee. 
-It also means it can only do integers and will block any other (e.g. debugging) uses of
-the Serial interface.
+VSync uses Serial to synchronize int variables, which means that it will work through your USB cable as well as with your XBee. 
+It also means it can only do integers and will block any other (e.g. debugging) uses of the Serial interface.
     
-The library uses a very simple human readable protocol that is optimized for minimal 
-data traffic (e.g. only when a value changes it is sent over the line).
-The protocol is package based with two kinds of packages:
+The library uses a very simple human readable protocol that is optimized for minimal data traffic (e.g. only when a variable changes it is sent over the line). The protocol is package based with two kinds of packages:
   * Full-Sync-Package: contains the values of all variables
   * Diff-Sync-Package: contains the values only of variables that changed
   
-The Full-Sync-Package looks like this: A<val1>|<val1>|<val3># if you are syncing three
-variables. E.g if the variables have the values 4, -8, 555 the package looks like:
-
-`A|4|-8|555#`
-
-The A at the beginning stands for all values, the # is the end-character.
-The Diff-Sync-Package looks like this: 0|4|2|555# if the first and the last value
-changed to 4 and 555. If only few (1 or 2) variables changed a Diff-Sync-Package is sent;
-if lots of variables changed it is more efficient to send a Full-Sync-Package, because
-the id's of the variables do not need to be sent.
+The Full-Sync-Package looks like this: A<val1>|<val1>|<val3># if you are syncing three variables. E.g if the variables have the values 4, -8, 555 the package would look like:
+```A|4|-8|555#```
+The A at the beginning stands for 'all values', the # is the end-character.
+The Diff-Sync-Package looks like this: 0|4|2|555# if value 0 and value 2
+changed to 4 and 555. If only few (1 or 2) variables changed, a Diff-Sync-Package is sent; if lots of variables changed it is more efficient to send a Full-Sync-Package, because the id's of the variables do not need to be sent.
