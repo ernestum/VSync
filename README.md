@@ -14,6 +14,7 @@ for a PID algorithm ...), that often need to be changed during the runtime of yo
 Simply synchronize the position of a sliders in your Processing sketch
 with the Arduino to transfer transfer a parameter.
 
+
 Concepts:
 ---------
 The idea of this library is to make variables in one sketch (either Arduino or Processing) available in a different sketch. A variable is always synchronized from one side to another side. 
@@ -29,6 +30,12 @@ Arduino ---> Processing
 Arduino <--- Processing
 Arduino ---> Arduino
 Arduino <--- Arduino
+
+
+Usage:
+------
+
+
 
 Tip for debugging:
 ------------------
