@@ -36,7 +36,7 @@ Usage:
 ------
 Let's go back to the example in 'Concepts' where we synchronize `servoAngle` from an Arduino to a Processing sketch.
 
---- On the Arduino side TODO: figure out how to do the subsections!!!
+### On the Arduino side
 
 First you would need to make yourself a new ValueSender object like this:
 ```
@@ -75,7 +75,7 @@ void loop()
 }
 ```
 
---- On the Processing side TODO: figure out how to do the subsections!!!
+### On the Processing side
 
 After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.
 
