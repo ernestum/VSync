@@ -1,137 +1,207 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-<title>Processing VSync</title>
-<meta name="description" content="A library for the Processing programming environment" />
-<meta name="keywords" content="processing.org, library, ?" />
-<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Language" content="en-us" />
-<meta name="ROBOTS" content="index,follow,archive" />
-<meta http-equiv="imagetoolbar" content="false" />
-<meta name="MSSmartTagsPreventParsing" content="true" />
-<meta name="author" content="Maximilian Ernestus" />
-<meta name="Rating" content="General" />
-<meta name="revisit-after" content="7 Days" />
-<meta name="doc-class" content="Living Document" />
-<link rel="stylesheet" type="text/css" href="./stylesheet.css">
-</head>
-<body>
-	<div id="container">
-	
-		<div id="header">
-			<h1>Processing VSync</h1>
-		</div>
-		
-		<div id="menu" class="clear">
-			<ul>
-				<li><a href="#about">About</a> \ </li>
-				<li><a href="#download">Download</a> \ </li>
-				<li><a href="#download">Installation</a> \ </li>
-				<li><a href="#examples">Examples</a> \ </li>
-				<li><a href="./reference/index.html" target="_blank">Reference</a></li>
-				<!-- <li><a href="#demos">Demos</a> \ </li> -->				
-				<!-- <li><a href="#misc">Misc</a> \ </li> -->
-				<!-- <li><a href="#images">Images</a> \ </li> -->
-			</ul>
-		</div>
-		
-		<div id="content" class="clear">
-			
-			<div id="about">
-			<h2>Processing VSync</h2>
-			<p>
-			A library by <a href="http://erniejunior.wordpress.com/">Maximilian Ernestus</a> for the <a href="http://www.processing.org" target="_blank">Processing</a> programming environment.<br>
-			Last update, 03/06/2014.
-			</p>
-			<p>
-			Will magically synchronize variables among Arduinos and your Processing sketch.<br>
-			The Processing counterpart of the VSync library. <br>
-			Feel free to replace this paragraph with a description of the library.<br>
-			Contributed libraries are developed, documented, and maintained by members of the Processing community. Further directions are included with each library. For feedback and support, please post to the Discourse. We strongly encourage all libraries to be open source, but not all of them are.
-			</p>
-			</div>
-			
-			
-			
-			<div id="download" class="clear">
-			<h2>Download</h2>
-			<p>
-			Download Processing VSync version v0.1 (0) in 
-			<a href="./download/ProcessingVSync-0.zip">.zip format</a>.
-			</p>
-			<h2>Installation</h2>
-			<p>
-			Unzip and put the extracted ProcessingVSync folder into the libraries folder of your Processing sketches. Reference and examples are included in the ProcessingVSync folder.
-			</p>
-			</div>	
-			
-			
-			<div id="resources">
-			<p><strong>Keywords</strong>. ?</p>
-			<p><strong>Reference</strong>. Have a look at the javadoc reference <a href="./reference/index.html" target="_blank">here</a>. A copy of the reference is included in the .zip as well.</p>		
-			<p><strong>Source</strong>. The source code of Processing VSync is available at <a href="https://github.com/erniejunior/Processing-VSync/">GitHub</a>, and its repository can be browsed <a href="https://github.com/erniejunior/Processing-VSync/" target="_blank">here</a>.</p>			
-			</div>
-			
-			
-			<div id="examples" class="clear">
-			<h2>Examples</h2>
-			<p>Find a list of examples in the current distribution of Processing VSync, or have a look at them by following the links below.</p>
-			<ul>
-			<li><a href="examples/BidirectionalSync/BidirectionalSync.pde">BidirectionalSync</a></li> <li><a href="examples/CP5_VSync/CP5_VSync.pde">CP5_VSync</a></li> <li><a href="examples/LatencyTester/LatencyTester.pde">LatencyTester</a></li> <li><a href="examples/SimpleReceiver/SimpleReceiver.pde">SimpleReceiver</a></li> <li><a href="examples/SimpleSender/SimpleSender.pde">SimpleSender</a></li> 
-			</ul>
-			</div>
-			
-			
-			<div id="info">
-			<h2>Tested</h2>
-			<p>
-			<!-- on which platform has the library been tested? -->
-			<strong>Platform</strong> linux
-			
-			<!-- which processing version did you use for testing your library? -->
-			<br /><strong>Processing</strong> 2.1.1
-			
-			<!-- does your library depend on any other library or framework? -->
-			<br /><strong>Dependencies</strong> serial
-			</p>
-			</div>
-		
-			
-			<!-- use the demos section for a list of applets run in a browser. -->
-			<!--
-			<div id="demos" class="clear">
-				<h2>demos</h2>
-				<p>
-				find a list of online applet demos below.
-				
-				<ul>
-					<li><a href="./applets/demo/index.html">demo</a></li>
-				</ul>
-				</p>
-			</div>
-			-->
-			
-			<!-- use the misc section for other relevant information. Activate the link to the misc section in the menu above. -->
-			<!--
-			<div id="misc" class="clear">
-				<p></p>
-			</div>
-			-->
-			
-			<!-- use the images/screenshots section. Activate the link to the misc section in the menu above. -->
-			<!--
-			<div id="images" class="clear">
-			</div>
-			-->
-			
-			
-			<br class="clear" />
-		</div>
-		
-		<div id="footer">
-			<p>by Maximilian Ernestus, (c) 2013.</p>
-		</div>
-	</div>
-</body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Vsync by erniejunior</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Vsync</h1>
+        <p>An Arduino library to easily synchronize integer values between arduinos (via the Serial interface eg. using XBee)</p>
+
+        <p class="view"><a href="https://github.com/erniejunior/VSync">View the Project on GitHub <small>erniejunior/VSync</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/erniejunior/VSync/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/erniejunior/VSync/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/erniejunior/VSync">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="vsync-library" class="anchor" href="#vsync-library"><span class="octicon octicon-link"></span></a>VSync Library</h1>
+
+<p>This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.</p>
+
+<h2>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h2>
+
+<ol>
+<li>Upload the SimpleSender example on your Arduino.</li>
+<li>Connect something interesting to Analog Pin A0.</li>
+<li>Open the SimpleReceiver example in Processing.</li>
+<li>Change the serial port at the head of the setup() to match your Arduino.</li>
+<li>Hit Run (ctrl+r).</li>
+</ol><h2>
+<a name="use-cases" class="anchor" href="#use-cases"><span class="octicon octicon-link"></span></a>Use cases</h2>
+
+<p>For example if you read the heading off a digital compass and store it in a variable
+on your Arduino, you can sync that variable with a Processing sketch. In the Processing
+sketch you can use it to visualize the digital compass reading.</p>
+
+<p>Maybe you have many settings (color of a RGB LED; angle of a servo motor; parameters
+for a PID algorithm ...), that often need to be changed during the runtime of your Arduino.
+Simply synchronize the position of a sliders in your Processing sketch
+with the Arduino to transfer transfer a parameter.</p>
+
+<h2>
+<a name="concepts" class="anchor" href="#concepts"><span class="octicon octicon-link"></span></a>Concepts</h2>
+
+<p>The idea of this library is to make variables in one sketch (either Arduino or Processing) available in a different sketch. A variable is always synchronized from one side to another side. 
+Let's assume we have a variable called <code>servoAngle</code> on our Arduino [A] and want to use it in our Processing sketch [P]. To synchronize the variable from [A] to [P] we need a ValueSender on the [A] side and a ValueReceiver on the [P] side. </p>
+
+<p>[A] : ValueSender  -------------~servoAngle~-------------&gt;  [P] : ValueReceiver</p>
+
+<p>Now every time the value of <code>servoAngle</code> changes on [A], that change will propagate to [P]. This is a one-way-thing: changing <code>servoAngle</code> on the [P] side will not induce any changes at [A] and as soon as [A] sends an update on <code>servoAngle</code> the change is overridden.
+You could use another ValueSender on [P] and a ValueReceiver on [A] to synchronize in the other direction, but VSync is neither built nor tested for that use case. Bad things might happen, if the variable is changed on both sides at the same time!</p>
+
+<p>These principles apply to all possible synchronization directions:</p>
+
+<ul>
+<li>Arduino ---&gt; Processing</li>
+<li>Arduino &lt;--- Processing</li>
+<li>Arduino ---&gt; Arduino</li>
+<li>Arduino &lt;--- Arduino</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Let's go back to the example in 'Concepts' where we synchronize <code>servoAngle</code> from an Arduino to a Processing sketch.</p>
+
+<h3>
+<a name="on-the-arduino-side" class="anchor" href="#on-the-arduino-side"><span class="octicon octicon-link"></span></a>On the Arduino side</h3>
+
+<p>First you would need to make yourself a new ValueSender object like this:</p>
+
+<div class="highlight highlight-C++"><pre><span class="n">ValueSender</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span> <span class="n">sender</span><span class="p">;</span>
+</pre></div>
+
+<p>You are probably confused by the pointy brackets with the 1 in between. That is just a special notation to tell the ValueSender how many variables you want to synchronize.</p>
+
+<p>After you created the ValueSender object you need to tell it what variable you want to synchronize and observe for changes. For this you need to call it's <code>observe()</code> function in your <code>setup()</code>:</p>
+
+<div class="highlight highlight-C++"><pre><span class="n">sender</span><span class="p">.</span><span class="n">observe</span><span class="p">(</span><span class="n">servoAngle</span><span class="p">);</span>
+</pre></div>
+
+<p>Finally you need to make the ValueSender do it's actual synchronization by calling its <code>sync()</code> function somewhere in your <code>loop()</code>:</p>
+
+<div class="highlight highlight-C++"><pre><span class="n">sender</span><span class="p">.</span><span class="n">sync</span><span class="p">();</span>
+</pre></div>
+
+<p>The complete sketch would then look like this:</p>
+
+<div class="highlight highlight-C++"><pre><span class="cp">#include &lt;VSync.h&gt;</span>
+
+<span class="n">ValueSender</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span> <span class="n">sender</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">servoAngle</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">19200</span><span class="p">);</span>
+  <span class="n">sender</span><span class="p">.</span><span class="n">observe</span><span class="p">(</span><span class="n">servoAngle</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="p">...</span> <span class="n">your</span> <span class="n">code</span><span class="p">;</span> <span class="n">possibly</span> <span class="n">changing</span> <span class="n">servoAngle</span> <span class="p">...</span>
+
+  <span class="n">sender</span><span class="p">.</span><span class="n">sync</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="on-the-processing-side" class="anchor" href="#on-the-processing-side"><span class="octicon octicon-link"></span></a>On the Processing side</h3>
+
+<p>After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.</p>
+
+<p>Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:</p>
+
+<div class="highlight highlight-Java"><pre><span class="n">Serial</span> <span class="n">serial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Serial</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"&lt;SERIAL_PORT_NAME_HERE&gt;"</span><span class="o">,</span> <span class="mi">19200</span><span class="o">);</span>
+</pre></div>
+
+<p>The easiest way to figure out the right name for the serial port is to have a look in your Arduino IDE and see what port is checked under Tools-&gt;Serial Port when you upload code to your Arduino.
+On Linux it often starts with /dev/ttyUSB oder /dev/ttyACM.</p>
+
+<p>After the serial object is set up we can proceed to create the ValueReceiver object like so:</p>
+
+<div class="highlight highlight-Java"><pre><span class="n">ValueReceiver</span> <span class="n">receiver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueReceiver</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">serial</span><span class="o">);</span>
+</pre></div>
+
+<p>This looks a bit different than on the Arduino side because the Processing syntax is slightly different and because we need to somehow pass the serial object to the receiver.</p>
+
+<p>After that everything is quite similar to the Arduino code. We tell the ValueReceiver what variable to observe and synchronize with the <code>observe()</code> function <code>receiver.observe("servoAngle")</code> (note the quotes around the variable name; another special Processing thing) and we are done because the call to <code>sync()</code> is done automagically for you by Processing.</p>
+
+<p>The complete Processing sketch would look like this:</p>
+
+<div class="highlight highlight-Java"><pre><span class="kn">import</span> <span class="nn">processing.serial.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">vsync.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="n">servoAngle</span><span class="o">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="o">()</span> 
+<span class="o">{</span>
+  <span class="n">size</span><span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
+
+  <span class="n">Serial</span> <span class="n">serial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Serial</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"&lt;SERIAL_PORT_NAME_HERE&gt;"</span><span class="o">,</span> <span class="mi">19200</span><span class="o">);</span>
+  <span class="n">ValueReceiver</span> <span class="n">receiver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueReceiver</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">serial</span><span class="o">);</span>
+  <span class="n">receiver</span><span class="o">.</span><span class="na">observe</span><span class="o">(</span><span class="s">"servoAngle"</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kt">void</span> <span class="nf">draw</span><span class="o">()</span> 
+<span class="o">{</span>
+  <span class="o">...</span> <span class="n">your</span> <span class="n">drawing</span> <span class="n">code</span><span class="o">,</span> <span class="n">possibly</span> <span class="n">using</span> <span class="n">servoAngle</span> <span class="o">...</span>
+<span class="o">}</span>
+
+</pre></div>
+
+<h2>
+<a name="tip-for-debugging" class="anchor" href="#tip-for-debugging"><span class="octicon octicon-link"></span></a>Tip for debugging</h2>
+
+<p>To make two Arduinos that are connected to you linux machine via USB talk to each other just type:</p>
+
+<p><code>dd if=/dev/tty&lt;ALICE&gt; bs=1 of=/dev/tty&lt;BOB&gt; bs=1</code></p>
+
+<p>(Adapt the  and  part according to the addresses on your computer. Alice is the sending arduino while Bob is the receiving end)</p>
+
+<p>If this does not work right away try <code>screen /dev/tty&lt;ALICE&gt;</code> and exit it with ctrl+a, k, y. Then try the above line again.</p>
+
+<h2>
+<a name="technical-details" class="anchor" href="#technical-details"><span class="octicon octicon-link"></span></a>Technical details</h2>
+
+<p>(boring, don't read if you just want to use the library)</p>
+
+<p>VSync uses Serial to synchronize int variables, which means that it will work through your USB cable as well as with your XBee. 
+It also means it can only do integers and will block any other (e.g. debugging) uses of the Serial interface.</p>
+
+<p>The library uses a very simple human readable protocol that is optimized for minimal data traffic (e.g. only when a variable changes it is sent over the line). The protocol is package based with two kinds of packages:</p>
+
+<ul>
+<li>Full-Sync-Package: contains the values of all variables</li>
+<li>Diff-Sync-Package: contains the values only of variables that changed</li>
+</ul><p>The Full-Sync-Package looks like this: A||# if you are syncing three variables. E.g if the variables have the values 4, -8, 555 the package would look like:</p>
+
+<pre><code>A|4|-8|555#
+</code></pre>
+
+<p>The A at the beginning stands for 'all values', the # is the end-character.
+The Diff-Sync-Package looks like this: 0|4|2|555# if value 0 and value 2
+changed to 4 and 555. If only few (1 or 2) variables changed, a Diff-Sync-Package is sent; if lots of variables changed it is more efficient to send a Full-Sync-Package, because the id's of the variables do not need to be sent.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/erniejunior">erniejunior</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
 </html>
