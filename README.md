@@ -2,6 +2,7 @@ VSync Library
 =========
 
 This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
+Look [here](https://github.com/erniejunior/Processing-VSync) for it's Processing counterpart.
 
 
 Quick start
