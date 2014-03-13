@@ -3,6 +3,16 @@ VSync Library
 
 This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
 
+
+Quick start
+-----------
+1. Upload the SimpleSender example on your Arduino.
+2. Connect something interesting to Analog Pin A0.
+3. Open the SimpleReceiver example in Processing.
+4. Change the serial port at the head of the setup() to match your Arduino.
+5. Hit Run (ctrl+r).
+
+
 Use cases
 ---------
 For example if you read the heading off a digital compass and store it in a variable
