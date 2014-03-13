@@ -26,10 +26,10 @@ Now every time the value of `servoAngle` changes on [A], that change will propag
 You could use another ValueSender on [P] and a ValueReceiver on [A] to synchronize in the other direction, but VSync is neither built nor tested for that use case. Bad things might happen, if the variable is changed on both sides at the same time!
 
 These principles apply to all possible synchronization directions:
-Arduino ---> Processing
-Arduino <--- Processing
-Arduino ---> Arduino
-Arduino <--- Arduino
+* Arduino ---> Processing
+* Arduino <--- Processing
+* Arduino ---> Arduino
+* Arduino <--- Arduino
 
 
 Usage:
