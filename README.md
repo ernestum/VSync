@@ -3,8 +3,8 @@ VSync Library
 
 This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
 
-Use cases:
-----------
+Use cases
+---------
 For example if you read the heading off a digital compass and store it in a variable
 on your Arduino, you can sync that variable with a Processing sketch. In the Processing
 sketch you can use it to visualize the digital compass reading.
@@ -15,8 +15,8 @@ Simply synchronize the position of a sliders in your Processing sketch
 with the Arduino to transfer transfer a parameter.
 
 
-Concepts:
----------
+Concepts
+--------
 The idea of this library is to make variables in one sketch (either Arduino or Processing) available in a different sketch. A variable is always synchronized from one side to another side. 
 Let's assume we have a variable called `servoAngle` on our Arduino [A] and want to use it in our Processing sketch [P]. To synchronize the variable from [A] to [P] we need a ValueSender on the [A] side and a ValueReceiver on the [P] side. 
 
@@ -32,8 +32,8 @@ These principles apply to all possible synchronization directions:
 * Arduino <--- Arduino
 
 
-Usage:
-------
+Usage
+-----
 Let's go back to the example in 'Concepts' where we synchronize `servoAngle` from an Arduino to a Processing sketch.
 
 ### On the Arduino side
@@ -117,8 +117,8 @@ void draw()
 
 ```
 
-Tip for debugging:
-------------------
+Tip for debugging
+-----------------
 
 To make two Arduinos that are connected to you linux machine via USB talk to each other just type:
 
@@ -130,8 +130,8 @@ If this does not work right away try `screen /dev/tty<ALICE>` and exit it with c
 
 
 
-Technical details:
-------------------
+Technical details
+-----------------
 
 (boring, don't read if you just want to use the library)
     
