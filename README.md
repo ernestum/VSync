@@ -39,23 +39,23 @@ Let's go back to the example in 'Concepts' where we synchronize `servoAngle` fro
 ### On the Arduino side
 
 First you would need to make yourself a new ValueSender object like this:
-```Arduino
+```C++
 ValueSender<1> sender;
 ```
 You are probably confused by the pointy brackets with the 1 in between. That is just a special notation to tell the ValueSender how many variables you want to synchronize.
 
 After you created the ValueSender object you need to tell it what variable you want to synchronize and observe for changes. For this you need to call it's `observe()` function in your `setup()`:
-```Arduino
+```C++
 sender.observe(servoAngle);
 ```
 
 Finally you need to make the ValueSender do it's actual synchronization by calling its `sync()` function somewhere in your `loop()`:
-```Arduino
+```C++
 sender.sync();
 ```
 
 The complete sketch would then look like this:
-```Arduino
+```C++
 #include <VSync.h>
 
 ValueSender<1> sender;
@@ -80,14 +80,14 @@ void loop()
 After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.
 
 Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:
-```Processing
+```Java
 Serial serial = new Serial(this, "<SERIAL_PORT_NAME_HERE>", 19200);
 ```
 The easiest way to figure out the right name for the serial port is to have a look in your Arduino IDE and see what port is checked under Tools->Serial Port when you upload code to your Arduino.
 On Linux it often starts with /dev/ttyUSB oder /dev/ttyACM.
 
 After the serial object is set up we can proceed to create the ValueReceiver object like so:
-```Processing
+```Java
 ValueReceiver receiver = new ValueReceiver(this, serial);
 ```
 This looks a bit different than on the Arduino side because the Processing syntax is slightly different and because we need to somehow pass the serial object to the receiver.
@@ -95,7 +95,7 @@ This looks a bit different than on the Arduino side because the Processing synta
 After that everything is quite similar to the Arduino code. We tell the ValueReceiver what variable to observe and synchronize with the `observe()` function `receiver.observe("servoAngle")` (note the quotes around the variable name; another special Processing thing) and we are done because the call to `sync()` is done automagically for you by Processing.
 
 The complete Processing sketch would look like this:
-```Processing
+```Java
 import processing.serial.*;
 import vsync.*;
 
