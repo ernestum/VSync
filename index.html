@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>Vsync</h1>
-        <p>Library to synchronize variables between Arduinos and Processing sketches.</p>
+        <p>An Arduino library to easily synchronize integer values between arduinos (via the Serial interface eg. using XBee)</p>
 
         <p class="view"><a href="https://github.com/erniejunior/VSync">View the Project on GitHub <small>erniejunior/VSync</small></a></p>
 
@@ -31,7 +31,8 @@
         <h1>
 <a name="vsync-library" class="anchor" href="#vsync-library"><span class="octicon octicon-link"></span></a>VSync Library</h1>
 
-<p>This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.</p>
+<p>This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
+Look <a href="https://github.com/erniejunior/Processing-VSync">here</a> for it's Processing counterpart.</p>
 
 <h2>
 <a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h2>
@@ -121,7 +122,8 @@ You could use another ValueSender on [P] and a ValueReceiver on [A] to synchroni
 <h3>
 <a name="on-the-processing-side" class="anchor" href="#on-the-processing-side"><span class="octicon octicon-link"></span></a>On the Processing side</h3>
 
-<p>After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.</p>
+<p>After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.
+Get the Processing library <a href="https://github.com/erniejunior/Processing-VSync">here</a>.</p>
 
 <p>Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:</p>
 
