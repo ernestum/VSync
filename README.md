@@ -89,6 +89,7 @@ void loop()
 ### On the Processing side
 
 After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.
+Get the Processing library [here](https://github.com/erniejunior/Processing-VSync).
 
 Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:
 ```Java
