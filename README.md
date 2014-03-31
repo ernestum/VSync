@@ -2,12 +2,12 @@ VSync Library
 =========
 
 This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
-Look [here](https://github.com/erniejunior/Processing-VSync) for it's Processing counterpart.
+Look [here](https://github.com/erniejunior/VSync-for-Processing) for it's Processing counterpart.
 
 
 Quick start
 -----------
-1. Upload the SimpleSender example on your Arduino.
+1. Upload the SimpleSender example to your Arduino.
 2. Connect something interesting to Analog Pin A0.
 3. Open the SimpleReceiver example in Processing.
 4. Change the serial port at the head of the setup() to match your Arduino.
@@ -33,8 +33,8 @@ Let's assume we have a variable called `servoAngle` on our Arduino [A] and want 
 
 [A] : ValueSender  -------------~servoAngle~------------->  [P] : ValueReceiver
 
-Now every time the value of `servoAngle` changes on [A], that change will propagate to [P]. This is a one-way-thing: changing `servoAngle` on the [P] side will not induce any changes at [A] and as soon as [A] sends an update on `servoAngle` the change is overridden.
-You could use another ValueSender on [P] and a ValueReceiver on [A] to synchronize in the other direction, but VSync is neither built nor tested for that use case. Bad things might happen, if the variable is changed on both sides at the same time!
+Now every time the value of `servoAngle` changes on [A], that change will propagate to [P]. This is a one-way-thing: changing `servoAngle` on the [P] side will not induce any changes at [A]. As soon as [A] sends an update on `servoAngle` the change is overridden.
+<sub>(You could use another ValueSender on [P] and a ValueReceiver on [A] to synchronize in the other direction, but VSync is neither built nor tested for that use case. Bad things might happen, if the variable is changed on both sides at the same time!)</sub>
 
 These principles apply to all possible synchronization directions:
 * Arduino ---> Processing
@@ -89,7 +89,7 @@ void loop()
 ### On the Processing side
 
 After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.
-Get the Processing library [here](https://github.com/erniejunior/Processing-VSync).
+Get the Processing library [here](https://github.com/erniejunior/VSync-for-Processing).
 
 Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:
 ```Java
@@ -132,7 +132,7 @@ void draw()
 Tip for debugging
 -----------------
 
-To make two Arduinos that are connected to you linux machine via USB talk to each other just type:
+To make two Arduinos that are connected to your Linux machine via USB talk to each other just type:
 
 `dd if=/dev/tty<ALICE> bs=1 of=/dev/tty<BOB> bs=1`
 
