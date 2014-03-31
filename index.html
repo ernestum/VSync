@@ -32,13 +32,13 @@
 <a name="vsync-library" class="anchor" href="#vsync-library"><span class="octicon octicon-link"></span></a>VSync Library</h1>
 
 <p>This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
-Look <a href="https://github.com/erniejunior/Processing-VSync">here</a> for it's Processing counterpart.</p>
+Look <a href="https://github.com/erniejunior/VSync-for-Processing">here</a> for it's Processing counterpart.</p>
 
 <h2>
 <a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h2>
 
 <ol>
-<li>Upload the SimpleSender example on your Arduino.</li>
+<li>Upload the SimpleSender example to your Arduino.</li>
 <li>Connect something interesting to Analog Pin A0.</li>
 <li>Open the SimpleReceiver example in Processing.</li>
 <li>Change the serial port at the head of the setup() to match your Arduino.</li>
@@ -63,8 +63,8 @@ Let's assume we have a variable called <code>servoAngle</code> on our Arduino [A
 
 <p>[A] : ValueSender  -------------~servoAngle~-------------&gt;  [P] : ValueReceiver</p>
 
-<p>Now every time the value of <code>servoAngle</code> changes on [A], that change will propagate to [P]. This is a one-way-thing: changing <code>servoAngle</code> on the [P] side will not induce any changes at [A] and as soon as [A] sends an update on <code>servoAngle</code> the change is overridden.
-You could use another ValueSender on [P] and a ValueReceiver on [A] to synchronize in the other direction, but VSync is neither built nor tested for that use case. Bad things might happen, if the variable is changed on both sides at the same time!</p>
+<p>Now every time the value of <code>servoAngle</code> changes on [A], that change will propagate to [P]. This is a one-way-thing: changing <code>servoAngle</code> on the [P] side will not induce any changes at [A]. As soon as [A] sends an update on <code>servoAngle</code> the change is overridden.
+<sub>(You could use another ValueSender on [P] and a ValueReceiver on [A] to synchronize in the other direction, but VSync is neither built nor tested for that use case. Bad things might happen, if the variable is changed on both sides at the same time!)</sub></p>
 
 <p>These principles apply to all possible synchronization directions:</p>
 
@@ -123,7 +123,7 @@ You could use another ValueSender on [P] and a ValueReceiver on [A] to synchroni
 <a name="on-the-processing-side" class="anchor" href="#on-the-processing-side"><span class="octicon octicon-link"></span></a>On the Processing side</h3>
 
 <p>After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.
-Get the Processing library <a href="https://github.com/erniejunior/Processing-VSync">here</a>.</p>
+Get the Processing library <a href="https://github.com/erniejunior/VSync-for-Processing">here</a>.</p>
 
 <p>Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:</p>
 
@@ -168,7 +168,7 @@ On Linux it often starts with /dev/ttyUSB oder /dev/ttyACM.</p>
 <h2>
 <a name="tip-for-debugging" class="anchor" href="#tip-for-debugging"><span class="octicon octicon-link"></span></a>Tip for debugging</h2>
 
-<p>To make two Arduinos that are connected to you linux machine via USB talk to each other just type:</p>
+<p>To make two Arduinos that are connected to your Linux machine via USB talk to each other just type:</p>
 
 <p><code>dd if=/dev/tty&lt;ALICE&gt; bs=1 of=/dev/tty&lt;BOB&gt; bs=1</code></p>
 
