@@ -16,14 +16,16 @@ Quick start
 
 Use cases
 ---------
-For example if you read the heading off a digital compass and store it in a variable
+If you read the heading off a digital compass and store it in a variable
 on your Arduino, you can sync that variable with a Processing sketch. In the Processing
-sketch you can use it to visualize the digital compass reading.
+sketch you can use it to visualize the digital compass reading ([this example](https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/SimpleReceiver/SimpleReceiver.pde) shows you how to syncronize a variable from an arduio to a processin sketch).
 
 Maybe you have many settings (color of a RGB LED; angle of a servo motor; parameters
 for a PID algorithm ...), that often need to be changed during the runtime of your Arduino.
 Simply synchronize the position of a sliders in your Processing sketch
-with the Arduino to transfer transfer a parameter.
+with the Arduino to transfer a parameter (like in [this example](https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/CP5_VSync/CP5_VSync.pde), that is using the awesome controlP5 library).
+
+It is also possible to sync different variables in two directions at the same time (have a look at [this example](https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/BidirectionalSync/BidirectionalSync.pde)).
 
 
 Concepts
