@@ -1,9 +1,20 @@
 VSync Library
-=========
+=============
 
 This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
 Look [here](https://github.com/erniejunior/VSync-for-Processing) for it's Processing counterpart.
 
+Installation
+------------
+To install the **arduino library** just download the .zip file and look [here](http://arduino.cc/en/Guide/Libraries) for further instructions.
+You can also just clone this git repository into you libraries folder:
+```Bash
+cd <yoursketchbook>/libraries/
+git clone https://github.com/erniejunior/VSync.git
+``` 
+After a restart of the arduino IDE you are done!
+
+The **processing version** of the library can be easily installed from within the processing IDE. Just go to `Sketch->Import Library->Add Library' and search for VSync.
 
 Quick start
 -----------
