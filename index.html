@@ -46,14 +46,16 @@ Look <a href="https://github.com/erniejunior/VSync-for-Processing">here</a> for 
 </ol><h2>
 <a name="use-cases" class="anchor" href="#use-cases"><span class="octicon octicon-link"></span></a>Use cases</h2>
 
-<p>For example if you read the heading off a digital compass and store it in a variable
+<p>If you read the heading off a digital compass and store it in a variable
 on your Arduino, you can sync that variable with a Processing sketch. In the Processing
-sketch you can use it to visualize the digital compass reading.</p>
+sketch you can use it to visualize the digital compass reading (<a href="https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/SimpleReceiver/SimpleReceiver.pde">this example</a> shows you how to syncronize a variable from an arduio to a processin sketch).</p>
 
 <p>Maybe you have many settings (color of a RGB LED; angle of a servo motor; parameters
 for a PID algorithm ...), that often need to be changed during the runtime of your Arduino.
 Simply synchronize the position of a sliders in your Processing sketch
-with the Arduino to transfer transfer a parameter.</p>
+with the Arduino to transfer a parameter (like in <a href="https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/CP5_VSync/CP5_VSync.pde">this example</a>, that is using the awesome controlP5 library).</p>
+
+<p>It is also possible to sync different variables in two directions at the same time (have a look at <a href="https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/BidirectionalSync/BidirectionalSync.pde">this example</a>).</p>
 
 <h2>
 <a name="concepts" class="anchor" href="#concepts"><span class="octicon octicon-link"></span></a>Concepts</h2>
@@ -127,7 +129,7 @@ Get the Processing library <a href="https://github.com/erniejunior/VSync-for-Pro
 
 <p>Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:</p>
 
-<div class="highlight highlight-Java"><pre><span class="n">Serial</span> <span class="n">serial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Serial</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"&lt;SERIAL_PORT_NAME_HERE&gt;"</span><span class="o">,</span> <span class="mi">19200</span><span class="o">);</span>
+<div class="highlight highlight-Java"><pre><span class="n">Serial</span> <span class="n">serial</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Serial</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"&lt;SERIAL_PORT_NAME_HERE&gt;"</span><span class="o">,</span> <span class="mi">19200</span><span class="o">);</span>
 </pre></div>
 
 <p>The easiest way to figure out the right name for the serial port is to have a look in your Arduino IDE and see what port is checked under Tools-&gt;Serial Port when you upload code to your Arduino.
@@ -135,7 +137,7 @@ On Linux it often starts with /dev/ttyUSB oder /dev/ttyACM.</p>
 
 <p>After the serial object is set up we can proceed to create the ValueReceiver object like so:</p>
 
-<div class="highlight highlight-Java"><pre><span class="n">ValueReceiver</span> <span class="n">receiver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueReceiver</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">serial</span><span class="o">);</span>
+<div class="highlight highlight-Java"><pre><span class="n">ValueReceiver</span> <span class="n">receiver</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ValueReceiver</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">serial</span><span class="o">);</span>
 </pre></div>
 
 <p>This looks a bit different than on the Arduino side because the Processing syntax is slightly different and because we need to somehow pass the serial object to the receiver.</p>
@@ -153,8 +155,8 @@ On Linux it often starts with /dev/ttyUSB oder /dev/ttyACM.</p>
 <span class="o">{</span>
   <span class="n">size</span><span class="o">(</span><span class="mi">400</span><span class="o">,</span> <span class="mi">400</span><span class="o">);</span>
 
-  <span class="n">Serial</span> <span class="n">serial</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Serial</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"&lt;SERIAL_PORT_NAME_HERE&gt;"</span><span class="o">,</span> <span class="mi">19200</span><span class="o">);</span>
-  <span class="n">ValueReceiver</span> <span class="n">receiver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ValueReceiver</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">serial</span><span class="o">);</span>
+  <span class="n">Serial</span> <span class="n">serial</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Serial</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"&lt;SERIAL_PORT_NAME_HERE&gt;"</span><span class="o">,</span> <span class="mi">19200</span><span class="o">);</span>
+  <span class="n">ValueReceiver</span> <span class="n">receiver</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ValueReceiver</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">serial</span><span class="o">);</span>
   <span class="n">receiver</span><span class="o">.</span><span class="na">observe</span><span class="o">(</span><span class="s">"servoAngle"</span><span class="o">);</span>
 <span class="o">}</span>
 
@@ -172,7 +174,7 @@ On Linux it often starts with /dev/ttyUSB oder /dev/ttyACM.</p>
 
 <p><code>dd if=/dev/tty&lt;ALICE&gt; bs=1 of=/dev/tty&lt;BOB&gt; bs=1</code></p>
 
-<p>(Adapt the  and  part according to the addresses on your computer. Alice is the sending arduino while Bob is the receiving end)</p>
+<p>(Adapt the <code>&lt;ALICE&gt;</code> and <code>&lt;BOB&gt;</code> part according to the addresses on your computer. Alice is the sending arduino while Bob is the receiving end)</p>
 
 <p>If this does not work right away try <code>screen /dev/tty&lt;ALICE&gt;</code> and exit it with ctrl+a, k, y. Then try the above line again.</p>
 
