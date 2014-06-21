@@ -138,7 +138,7 @@ To make two Arduinos that are connected to your Linux machine via USB talk to ea
 
 `dd if=/dev/tty<ALICE> bs=1 of=/dev/tty<BOB> bs=1`
 
-(Adapt the <ALICE> and <BOB> part according to the addresses on your computer. Alice is the sending arduino while Bob is the receiving end)
+(Adapt the `<ALICE>` and `<BOB>` part according to the addresses on your computer. Alice is the sending arduino while Bob is the receiving end)
 
 If this does not work right away try `screen /dev/tty<ALICE>` and exit it with ctrl+a, k, y. Then try the above line again.
 
