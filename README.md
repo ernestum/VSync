@@ -66,7 +66,7 @@ First you would need to make yourself a new ValueSender object like this:
 ```C++
 ValueSender<1> sender;
 ```
-You are probably confused by the pointy brackets with the 1 in between. That is just a special notation to tell the ValueSender how many variables you want to synchronize.
+You are probably confused by the pointy brackets with the 1 in between. That is just a special notation to tell the ValueSender how many variables you want to synchronize. <sub>If you want to know the details: I am using a template here to avoid dynamic array allocation.</sub>
 
 After you created the ValueSender object you need to tell it what variable you want to synchronize and observe for changes. For this you need to call it's `observe()` function in your `setup()`:
 ```C++
@@ -153,7 +153,7 @@ To make two Arduinos that are connected to your Linux machine via USB talk to ea
 
 If this does not work right away try `screen /dev/tty<ALICE>` and exit it with ctrl+a, k, y. Then try the above line again.
 
-
+**Never use two ValueReceivers or two ValueSenders on either end at the same time. Bad things might happen!**
 
 Technical details
 -----------------
