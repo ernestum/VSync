@@ -10,7 +10,7 @@
  
     This file should be used together with the SimpleSender example of the
     Processing version of the VSync Library 
-    ( https://github.com/erniejunior/Processing-VSync )
+    ( https://github.com/ernestum/Processing-VSync )
     
     Author: Maximilian Ernestus
    
