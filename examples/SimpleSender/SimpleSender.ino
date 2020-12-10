@@ -5,7 +5,7 @@
     analog pin in sync with a Processing sketch.
     It can be used together with the SimpleReceiver example of the 
     Processing version of this library.
-    ( https://github.com/erniejunior/Processing-VSync )
+    ( https://github.com/ernestum/Processing-VSync )
 
     Author: Maximilian Ernestus
     
