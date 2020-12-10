@@ -2,7 +2,7 @@ VSync Library
 =============
 
 This is the VSync library for the Arduino platform. It can 'magically' synchronize variables on your Arduino with variables on other Arduinos or in your Processing sketch.
-Look [here](https://github.com/erniejunior/VSync-for-Processing) for it's Processing counterpart.
+Look [here](https://github.com/ernestum/VSync-for-Processing) for it's Processing counterpart.
 
 Installation
 ------------
@@ -10,7 +10,7 @@ To install the **arduino library** just download the .zip file and look [here](h
 You can also just clone this git repository into you libraries folder:
 ```Bash
 cd <yoursketchbook>/libraries/
-git clone https://github.com/erniejunior/VSync.git
+git clone https://github.com/ernestum/VSync.git
 ``` 
 After a restart of the arduino IDE you are done!
 
@@ -29,14 +29,14 @@ Use cases
 ---------
 If you read the heading off a digital compass and store it in a variable
 on your Arduino, you can sync that variable with a Processing sketch. In the Processing
-sketch you can use it to visualize the digital compass reading ([this example](https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/SimpleReceiver/SimpleReceiver.pde) shows you how to syncronize a variable from an arduio to a processin sketch).
+sketch you can use it to visualize the digital compass reading ([this example](https://github.com/ernestum/VSync-for-Processing/blob/master/examples/SimpleReceiver/SimpleReceiver.pde) shows you how to syncronize a variable from an arduio to a processin sketch).
 
 Maybe you have many settings (color of a RGB LED; angle of a servo motor; parameters
 for a PID algorithm ...), that often need to be changed during the runtime of your Arduino.
 Simply synchronize the position of a sliders in your Processing sketch
-with the Arduino to transfer a parameter (like in [this example](https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/CP5_VSync/CP5_VSync.pde), that is using the awesome controlP5 library).
+with the Arduino to transfer a parameter (like in [this example](https://github.com/ernestum/VSync-for-Processing/blob/master/examples/CP5_VSync/CP5_VSync.pde), that is using the awesome controlP5 library).
 
-It is also possible to sync different variables in two directions at the same time (have a look at [this example](https://github.com/erniejunior/VSync-for-Processing/blob/master/examples/BidirectionalSync/BidirectionalSync.pde)).
+It is also possible to sync different variables in two directions at the same time (have a look at [this example](https://github.com/ernestum/VSync-for-Processing/blob/master/examples/BidirectionalSync/BidirectionalSync.pde)).
 
 
 Concepts
@@ -102,7 +102,7 @@ void loop()
 ### On the Processing side
 
 After everything is set up on the Arduino we take care of the receiving end in the Processing sketch.
-Get the Processing library [here](https://github.com/erniejunior/VSync-for-Processing).
+Get the Processing library [here](https://github.com/ernestum/VSync-for-Processing).
 
 Because Processing is not tightly integrated with serial communication and because there might be more than one Serial interface on your computer we first need to configure a serial object using the serial library:
 ```Java
